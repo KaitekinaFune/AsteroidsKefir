@@ -1,8 +1,10 @@
+using UnityEngine;
+
 public class BulletLauncher : ProjectileLauncher
 {
-    protected override void Shoot()
+    protected override bool CanShoot()
     {
-        
+        return Time.time >= nextFireTime;
     }
 
     private void OnEnable()

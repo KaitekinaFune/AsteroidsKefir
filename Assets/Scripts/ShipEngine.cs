@@ -18,7 +18,11 @@ public class ShipEngine : MonoBehaviour
 
     private void Update()
     {
-        rb.AddForce(input.Vertical * transform.up * speed * Time.deltaTime);
+        if (input.Vertical > 0f)
+        {
+            rb.AddForce(input.Vertical * transform.up * speed * Time.deltaTime);
+        }
+
         rb.AddTorque(-input.Horizontal * Vector3.forward * turnSpeed * Time.deltaTime);
     }
 }

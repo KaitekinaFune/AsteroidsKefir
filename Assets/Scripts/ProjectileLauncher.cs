@@ -5,27 +5,32 @@ using UnityEngine;
 public abstract class ProjectileLauncher : MonoBehaviour
 {
     [SerializeField] protected GameObject projectilePrefab;
-    [SerializeField] protected float shootSpeed;
+    [SerializeField] protected float fireRate;
 
     protected InputReader input;
-    protected ShootPointHolder shootPoint;
-    protected float lastShotTime;
+    private ShootPointHolder shootPoint;
+    
+    protected float nextFireTime;
     
     protected virtual void Awake()
     {
         input = GetComponent<InputReader>();
         shootPoint = GetComponent<ShootPointHolder>();
-        
-        lastShotTime = Time.time;
     }
 
     protected void TryShootProjectile()
     {
-        if (Time.time > lastShotTime + shootSpeed)
+        if (CanShoot())
         {
+            nextFireTime = Time.time + 1f / fireRate;
             Shoot();
         }
     }
+    
+    protected virtual void Shoot()
+    {
+        Instantiate(projectilePrefab, shootPoint.ShootPoint);
+    }
 
-    protected abstract void Shoot();
+    protected abstract bool CanShoot();
 }
