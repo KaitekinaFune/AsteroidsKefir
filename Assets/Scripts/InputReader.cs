@@ -6,16 +6,22 @@ public class InputReader : MonoBehaviour
     public float Vertical { get; private set; }
     public float Horizontal { get; private set; }
 
-    public event Action OnShoot = delegate { };
+    public event Action OnShootPrimary;
+    public event Action OnShootSecondary;
 
     private void Update()
     {
         Vertical = Input.GetAxis("Vertical");
         Horizontal = Input.GetAxis("Horizontal");
 
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Z))
         {
-            OnShoot?.Invoke();
+            OnShootPrimary?.Invoke();
+        }
+        
+        if (Input.GetKey(KeyCode.C))
+        {
+            OnShootSecondary?.Invoke();
         }
     }
 }
