@@ -41,14 +41,4 @@ public class LaserLauncher : ProjectileLauncher
             nextLaserRestockTime = Time.time + 1f / lasersRestockRate;
         }
     }
-
-    private void OnEnable()
-    {
-        input.OnShootSecondary += TryShootProjectile;
-    }
-
-    private void OnDisable()
-    {
-        input.OnShootSecondary -= TryShootProjectile;
-    }
 }

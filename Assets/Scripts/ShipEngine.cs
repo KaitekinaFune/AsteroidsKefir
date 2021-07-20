@@ -16,13 +16,13 @@ public class ShipEngine : MonoBehaviour
         input = GetComponent<InputReader>();
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (input.Vertical > 0f)
         {
-            rb.AddForce(input.Vertical * transform.up * speed * Time.deltaTime);
+            rb.AddForce(input.Vertical * transform.up * speed);
         }
 
-        rb.AddTorque(-input.Horizontal * Vector3.forward * turnSpeed * Time.deltaTime);
+        rb.AddTorque(-input.Horizontal * Vector3.forward * turnSpeed);
     }
 }

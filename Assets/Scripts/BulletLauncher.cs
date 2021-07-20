@@ -6,14 +6,4 @@ public class BulletLauncher : ProjectileLauncher
     {
         return Time.time >= nextFireTime;
     }
-
-    private void OnEnable()
-    {
-        input.OnShootPrimary += TryShootProjectile;
-    }
-
-    private void OnDisable()
-    {
-        input.OnShootPrimary -= TryShootProjectile;
-    }
 }

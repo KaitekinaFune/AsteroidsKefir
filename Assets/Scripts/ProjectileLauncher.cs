@@ -7,18 +7,16 @@ public abstract class ProjectileLauncher : MonoBehaviour
     [SerializeField] protected GameObject projectilePrefab;
     [SerializeField] protected float fireRate;
 
-    protected InputReader input;
     private ShootPointHolder shootPoint;
     
     protected float nextFireTime;
     
     protected virtual void Awake()
     {
-        input = GetComponent<InputReader>();
         shootPoint = GetComponent<ShootPointHolder>();
     }
 
-    protected void TryShootProjectile()
+    public void TryShootProjectile()
     {
         if (CanShoot())
         {
@@ -29,7 +27,7 @@ public abstract class ProjectileLauncher : MonoBehaviour
     
     protected virtual void Shoot()
     {
-        Instantiate(projectilePrefab, shootPoint.ShootPoint);
+        Instantiate(projectilePrefab, shootPoint.ShootPoint).GetComponent<Projectile>();
     }
 
     protected abstract bool CanShoot();

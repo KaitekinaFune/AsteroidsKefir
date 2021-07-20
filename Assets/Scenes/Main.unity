@@ -134,9 +134,10 @@ GameObject:
   - component: {fileID: 151934965}
   - component: {fileID: 151934967}
   - component: {fileID: 151934966}
-  - component: {fileID: 151934971}
+  - component: {fileID: 151934972}
   - component: {fileID: 151934970}
   - component: {fileID: 151934969}
+  - component: {fileID: 151934971}
   - component: {fileID: 151934968}
   m_Layer: 0
   m_Name: Player
@@ -157,7 +158,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 519136891}
-  - {fileID: 1659190036}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -173,8 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b606e7d425d27db468598143640d3f48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  turnSpeed: 15
+  speed: 10
+  turnSpeed: 5
 --- !u!114 &151934967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,6 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8be6d62c8178d634eaf79410fdeeb68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootPrimary: 122
+  shootSecondary: 99
 --- !u!54 &151934968
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -196,8 +198,8 @@ Rigidbody:
   m_GameObject: {fileID: 151934964}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 1
+  m_AngularDrag: 1
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -232,7 +234,7 @@ MonoBehaviour:
   projectilePrefab: {fileID: 0}
   fireRate: 0
   maxLasers: 3
-  timeBetweenLasersRestock: 10
+  lasersRestockRate: 5
 --- !u!114 &151934971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +248,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootPoint: {fileID: 1659190036}
+--- !u!114 &151934972
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151934964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e2b2d63d85e8cb4f8ff2188913ff823, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  primaryWeapon: {fileID: 151934969}
+  secondaryWeapon: {fileID: 151934970}
 --- !u!1 &362615020
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +453,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.75, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1659190036}
   m_Father: {fileID: 151934965}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -844,10 +861,10 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1659190035}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.88, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.524, z: 0}
+  m_LocalScale: {x: 1.3333334, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 151934965}
-  m_RootOrder: 1
+  m_Father: {fileID: 519136891}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

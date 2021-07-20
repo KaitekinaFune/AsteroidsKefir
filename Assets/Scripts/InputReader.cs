@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class InputReader : MonoBehaviour
 {
+    [SerializeField] private KeyCode shootPrimary;
+    [SerializeField] private KeyCode shootSecondary;
+    
     public float Vertical { get; private set; }
     public float Horizontal { get; private set; }
 
@@ -14,12 +17,12 @@ public class InputReader : MonoBehaviour
         Vertical = Input.GetAxis("Vertical");
         Horizontal = Input.GetAxis("Horizontal");
 
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKey(shootPrimary))
         {
             OnShootPrimary?.Invoke();
         }
         
-        if (Input.GetKey(KeyCode.C))
+        if (Input.GetKey(shootSecondary))
         {
             OnShootSecondary?.Invoke();
         }
