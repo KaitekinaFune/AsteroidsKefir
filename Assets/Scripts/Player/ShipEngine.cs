@@ -16,12 +16,28 @@ namespace Player
         {
             rb = GetComponent<Rigidbody>();
             input = GetComponent<InputReader>();
+            OnRespawn();
+
+            RespawnManager.Instance.OnRespawn += OnRespawn;
         }
 
         private void FixedUpdate()
         {
             rb.AddForce(input.Vertical * transform.up * speed);
             rb.AddTorque(-input.Horizontal * Vector3.forward * turnSpeed);
+        }
+
+        private void OnRespawn()
+        {
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
+
+        private void OnDestroy()
+        {
+            RespawnManager.Instance.OnRespawn -= OnRespawn;
         }
     }
 }

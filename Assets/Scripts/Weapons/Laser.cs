@@ -1,3 +1,4 @@
+using Obstacles;
 using UnityEngine;
 
 namespace Weapons
@@ -6,9 +7,12 @@ namespace Weapons
     {
         protected override void OnTriggerEnter(Collider other)
         {
-            var damageableObject = other.GetComponent<IDamageable>();
-            damageableObject?.DestroyObject();
-            Destroy(gameObject);
+            var obstacle = other.GetComponent<Obstacle>();
+            if (obstacle != null)
+            {
+                obstacle.DestroyObstacle();
+                Destroy(gameObject);
+            }
         }
     }
 }
