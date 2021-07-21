@@ -2,7 +2,7 @@ using System;
 using Managers;
 using UnityEngine;
 
-namespace Player
+namespace Ship
 {
     public class ShipHealth : MonoBehaviour
     {
@@ -16,12 +16,12 @@ namespace Player
 
         private void Start()
         {
-            RespawnManager.Instance.OnRespawn += OnRespawn;
+            GameOverManager.Instance.OnRespawn += OnRespawn;
         }
 
         private void OnDestroy()
         {
-            RespawnManager.Instance.OnRespawn -= OnRespawn;
+            GameOverManager.Instance.OnRespawn -= OnRespawn;
         }
 
         private void OnRespawn()

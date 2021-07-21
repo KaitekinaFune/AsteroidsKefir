@@ -1,9 +1,7 @@
-using Player;
 using UnityEngine;
 
 namespace Weapons
 {
-    [RequireComponent(typeof(InputReader))]
     [RequireComponent(typeof(ShootPointHolder))]
     public abstract class ProjectileLauncher : MonoBehaviour
     {

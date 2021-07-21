@@ -7,16 +7,16 @@ namespace UI
     {
         private void Start()
         {
-            RespawnManager.Instance.OnDeath += OnDeath;
-            RespawnManager.Instance.OnRespawn += OnRespawn;
+            GameOverManager.Instance.OnDeath += OnDeath;
+            GameOverManager.Instance.OnRespawn += OnRespawn;
             
             gameObject.SetActive(false);
         }
 
         private void OnDestroy()
         {
-            RespawnManager.Instance.OnDeath -= OnDeath;
-            RespawnManager.Instance.OnRespawn -= OnRespawn;
+            GameOverManager.Instance.OnDeath -= OnDeath;
+            GameOverManager.Instance.OnRespawn -= OnRespawn;
         }
 
         private void OnDeath()

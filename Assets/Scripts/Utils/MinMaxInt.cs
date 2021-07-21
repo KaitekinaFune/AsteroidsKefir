@@ -5,8 +5,11 @@ namespace Utils
     [System.Serializable]
     public struct MinMaxInt
     {
-        public int min;
-        public int max;
+        [SerializeField] private int min;
+        [SerializeField] private int max;
+
+        public int Min => min;
+        public int Max => max;
 
         public MinMaxInt(int min, int max)
         {

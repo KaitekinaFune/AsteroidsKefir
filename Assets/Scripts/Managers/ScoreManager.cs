@@ -30,12 +30,12 @@ namespace Managers
 
         private void Start()
         {
-            RespawnManager.Instance.OnRespawn += OnRespawn;
+            GameOverManager.Instance.OnRespawn += OnRespawn;
         }
 
         private void OnDisable()
         {
-            RespawnManager.Instance.OnRespawn -= OnRespawn;
+            GameOverManager.Instance.OnRespawn -= OnRespawn;
         }
 
         private void OnRespawn()
