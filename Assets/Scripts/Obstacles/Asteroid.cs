@@ -12,27 +12,16 @@ namespace Obstacles
         private bool isShattered;
         public float initialSpeed { get; private set; }
         
-        private Rigidbody rb;
         private float lifeTime;
 
         public event Action<Asteroid> OnAsteroidShattered;
-
-        private void Awake()
-        {
-            rb = GetComponent<Rigidbody>();
-        }
 
         public void SetSize(Vector3 scale)
         {
             transform.eulerAngles = new Vector3(0f, 0f, Random.value * 360f);
             transform.localScale = scale;
         }
-
-        public void SetPosition(Vector3 spawnPoint)
-        {
-            transform.position = spawnPoint;
-        }
-
+        
         public void FirstLaunch(Vector3 direction, float speed)
         {
             isShattered = false;
@@ -80,6 +69,11 @@ namespace Obstacles
             ScoreManager.Instance.OnAsteroidShattered();
             OnAsteroidShattered?.Invoke(this);
             OnAsteroidShattered = null;
+        }
+
+        public override void OnPlayerRespawn()
+        {
+            AsteroidsPool.Instance.ReturnObstacleToPool(this);
         }
     }
 }

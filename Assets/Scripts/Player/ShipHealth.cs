@@ -6,7 +6,7 @@ namespace Player
     public class ShipHealth : MonoBehaviour
     {
         public event Action OnDeath;
-    
+        
         public void TakeDamage()
         {
             gameObject.SetActive(false);

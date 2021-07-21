@@ -17,15 +17,15 @@ namespace Graphics
             {
                 SetTo2D();
             }
-
-            GraphicsManager.Instance.OnChangeGraphics2D += SetTo2D;
-            GraphicsManager.Instance.OnChangeGraphics3D += SetTo3D;
+            
+            GraphicsManager.Instance.OnChangeGraphicsTo2D += SetTo2D;
+            GraphicsManager.Instance.OnChangeGraphicsTo3D += SetTo3D;
         }
 
         private void OnDisable()
         {
-            GraphicsManager.Instance.OnChangeGraphics2D -= SetTo2D;
-            GraphicsManager.Instance.OnChangeGraphics3D -= SetTo3D;
+            GraphicsManager.Instance.OnChangeGraphicsTo2D -= SetTo2D;
+            GraphicsManager.Instance.OnChangeGraphicsTo3D -= SetTo3D;
         }
 
         private void SetTo2D()

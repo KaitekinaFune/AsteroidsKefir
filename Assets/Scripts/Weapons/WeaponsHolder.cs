@@ -17,7 +17,7 @@ namespace Weapons
             input.OnShootSecondary += secondaryWeapon.TryShootProjectile;
         }
 
-        private void OnDisable()
+        private void OnDestroy()
         {
             input.OnShootPrimary -= primaryWeapon.TryShootProjectile;
             input.OnShootSecondary -= secondaryWeapon.TryShootProjectile;

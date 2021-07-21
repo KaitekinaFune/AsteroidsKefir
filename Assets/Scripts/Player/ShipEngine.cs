@@ -17,7 +17,10 @@ namespace Player
             rb = GetComponent<Rigidbody>();
             input = GetComponent<InputReader>();
             OnRespawn();
+        }
 
+        private void Start()
+        {
             RespawnManager.Instance.OnRespawn += OnRespawn;
         }
 

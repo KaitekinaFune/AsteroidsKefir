@@ -27,6 +27,7 @@ namespace Player
             }
 
             shipHealth.OnDeath += Die;
+            Respawn();
         }
 
         public void Respawn()
@@ -43,7 +44,7 @@ namespace Player
 
             foreach (var obstacle in obstacles)
             {
-                obstacle.DestroyObstacle();
+                obstacle.OnPlayerRespawn();
             }
         }
 

@@ -6,12 +6,12 @@ namespace Graphics
     public class GraphicsManager : MonoBehaviour
     {
         public static GraphicsManager Instance { get; private set; }
-    
+
         public bool is3DOn { get; private set; }
 
-        public event Action OnChangeGraphics2D;
-        public event Action OnChangeGraphics3D;
-
+        public event Action OnChangeGraphicsTo2D;
+        public event Action OnChangeGraphicsTo3D;
+        
         private void Awake()
         {
             if (Instance == null)
@@ -23,17 +23,29 @@ namespace Graphics
                 Destroy(gameObject);
             }
         }
+        
+        public void SwitchGraphics()
+        {
+            if (is3DOn)
+            {
+                ChangeGraphicsTo2D();
+            }
+            else
+            {
+                ChangeGraphicsTo3D();
+            }
+        }
 
-        public void ChangeGraphics2D()
+        private void ChangeGraphicsTo2D()
         {
             is3DOn = false;
-            OnChangeGraphics2D?.Invoke();
+            OnChangeGraphicsTo2D?.Invoke();
         }
     
-        public void ChangeGraphics3D()
+        private void ChangeGraphicsTo3D()
         {
             is3DOn = true;
-            OnChangeGraphics3D?.Invoke();
+            OnChangeGraphicsTo3D?.Invoke();
         }
     }
 }

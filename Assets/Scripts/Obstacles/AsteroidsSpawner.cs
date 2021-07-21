@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils;
 
 namespace Obstacles
 {
@@ -12,11 +13,11 @@ namespace Obstacles
         
         [Header("Asteroids Settings")]
         [SerializeField] private float speed;
-        [SerializeField] private Vector2 sizeMinMax;
+        [SerializeField] private MinMaxFloat sizeMinMax;
         
         [Header("Shatter Settings")]
-        [SerializeField] private Vector2Int asteroidsShattersAmountMinMax;
-        [SerializeField] private Vector2 shatterAsteroidSizeRatioMinMax;
+        [SerializeField] private MinMaxInt asteroidsShattersAmountMinMax;
+        [SerializeField] private MinMaxFloat shatterAsteroidSizeRatioMinMax;
 
         private void Start()
         {
@@ -35,7 +36,7 @@ namespace Obstacles
 
         private void SpawnAsteroid(Asteroid asteroid)
         {
-            Vector3 scale = Vector3.one * Random.Range(sizeMinMax.x, sizeMinMax.y);
+            Vector3 scale = Vector3.one * sizeMinMax.GetRandom();
             asteroid.SetSize(scale);
             
             Vector3 spawnDirection = Random.insideUnitCircle.normalized * spawnDistance;
@@ -52,7 +53,7 @@ namespace Obstacles
 
         private void OnAsteroidShattered(Asteroid oldAsteroid)
         {
-            var shattersAmount = Random.Range(asteroidsShattersAmountMinMax.x, asteroidsShattersAmountMinMax.y);
+            var shattersAmount = asteroidsShattersAmountMinMax.GetRandom();
             var asteroids = AsteroidsPool.Instance.Get(shattersAmount);
 
             foreach (var asteroid in asteroids)
@@ -67,7 +68,7 @@ namespace Obstacles
         {
             var oldTransform = oldAsteroid.transform;
 
-            var ratio = Random.Range(shatterAsteroidSizeRatioMinMax.x, shatterAsteroidSizeRatioMinMax.y);
+            var ratio = shatterAsteroidSizeRatioMinMax.GetRandom();
             var scale = oldTransform.localScale / ratio;
             newAsteroid.SetSize(scale);
             
