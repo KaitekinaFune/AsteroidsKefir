@@ -3,51 +3,37 @@ using Utils;
 
 namespace Obstacles
 {
-    public class AsteroidsSpawner : MonoBehaviour
+    public class AsteroidsSpawner : ObstacleSpawner
     {
-        [Header("Spawn Settings")]
-        [SerializeField] private float spawnRate = 1f;
-        [SerializeField] private float spawnDistance = 20f;
-        [SerializeField] private float trajectoryDistance = 15f;
-        [SerializeField] private int asteroidsToSpawn = 1;
-        
-        [Header("Asteroids Settings")]
+        [Header("Asteroids Settings")] 
         [SerializeField] private float speed;
         [SerializeField] private MinMaxFloat sizeMinMax;
-        
-        [Header("Shatter Settings")]
+
+        [Header("Shatter Settings")] 
         [SerializeField] private MinMaxInt asteroidsShattersAmountMinMax;
         [SerializeField] private MinMaxFloat shatterAsteroidSizeRatioMinMax;
-
-        private void Start()
+        
+        protected override void SpawnObstacles()
         {
-            InvokeRepeating(nameof(SpawnAsteroids), spawnRate, spawnRate);
-        }
-
-        private void SpawnAsteroids()
-        {
-            var asteroids = AsteroidsPool.Instance.Get(asteroidsToSpawn);
+            var asteroids = AsteroidsPool.Instance.Get(obstaclesToSpawn);
 
             foreach (var asteroid in asteroids)
             {
-                SpawnAsteroid(asteroid);
+                SpawnObstacle(asteroid);
             }
         }
 
-        private void SpawnAsteroid(Asteroid asteroid)
+        private void SpawnObstacle(Asteroid asteroid)
         {
-            Vector3 scale = Vector3.one * sizeMinMax.GetRandom();
+            var scale = Vector3.one * sizeMinMax.GetRandom();
             asteroid.SetSize(scale);
             
-            Vector3 spawnDirection = Random.insideUnitCircle.normalized * spawnDistance;
-            Vector3 spawnPoint = transform.position + spawnDirection;
+            var spawnPoint = GetRandomSpawnPoint(scale.x / 2f);
             asteroid.SetPosition(spawnPoint);
             
-            float variance = Random.Range(-trajectoryDistance, trajectoryDistance);
-            Quaternion rotation = Quaternion.AngleAxis(variance, Vector3.forward);
-            float speedRatio = speed / scale.x;
-            
-            asteroid.FirstLaunch(rotation * -spawnDirection, speedRatio);
+            var speedRatio = speed / scale.x;
+            var direction = GetRandomDirection(spawnPoint);
+            asteroid.FirstLaunch(-direction, speedRatio);
             asteroid.OnAsteroidShattered += OnAsteroidShattered;
         }
 
@@ -72,13 +58,11 @@ namespace Obstacles
             var scale = oldTransform.localScale / ratio;
             newAsteroid.SetSize(scale);
             
-            var spawnPosition = oldTransform.position;
-            newAsteroid.SetPosition(spawnPosition);
+            var spawnPoint = oldTransform.position;
+            newAsteroid.SetPosition(spawnPoint);
             
-            Vector3 spawnDirection = Random.insideUnitCircle.normalized * spawnDistance;
-            float variance = Random.Range(-trajectoryDistance, trajectoryDistance);
-            Quaternion rotation = Quaternion.AngleAxis(variance, Vector3.forward);
-            newAsteroid.LaunchShattered(rotation * -spawnDirection, oldAsteroid.initialSpeed * ratio);
+            var direction = GetRandomDirection(spawnPoint);
+            newAsteroid.LaunchShattered(-direction, oldAsteroid.initialSpeed * ratio);
         }
     }
 }

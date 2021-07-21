@@ -1,9 +1,10 @@
 using System;
 using Obstacles;
+using Player;
 using UnityEngine;
 using Weapons;
 
-namespace Player
+namespace Managers
 {
     public class RespawnManager : MonoBehaviour
     {
@@ -44,7 +45,7 @@ namespace Player
 
             foreach (var obstacle in obstacles)
             {
-                obstacle.OnPlayerRespawn();
+                obstacle.DestroyObstacleSilent();
             }
         }
 

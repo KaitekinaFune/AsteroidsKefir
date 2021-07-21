@@ -13,7 +13,6 @@ namespace Obstacles
         protected override void Awake()
         {
             base.Awake();
-
             target = UfoTarget.Instance.transform;
         }
 
@@ -28,7 +27,7 @@ namespace Obstacles
             UfosPool.Instance.ReturnObstacleToPool(this);
         }
 
-        public override void OnPlayerRespawn()
+        public override void DestroyObstacleSilent()
         {
             UfosPool.Instance.ReturnObstacleToPool(this);
         }

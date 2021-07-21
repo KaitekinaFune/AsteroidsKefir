@@ -3,40 +3,30 @@ using Utils;
 
 namespace Obstacles
 {
-    public class UfosSpawner : MonoBehaviour
+    public class UfosSpawner : ObstacleSpawner
     {
-        [Header("Spawn Settings")]
-        [SerializeField] private float spawnRate = 1f;
-        [SerializeField] private float spawnDistance = 20f;
-        [SerializeField] private int ufosToSpawn = 1;
-
         [Header("Ufos Settings")] 
         [SerializeField] private MinMaxFloat ufoSpeedMinMax;
         [SerializeField] private MinMaxFloat ufoRotationSpeedMinMax;
 
-        private void Start()
+        protected override void SpawnObstacles()
         {
-            InvokeRepeating(nameof(SpawnUfos), spawnRate, spawnRate);
-        }
-
-        private void SpawnUfos()
-        {
-            var ufos = UfosPool.Instance.Get(ufosToSpawn);
+            var ufos = UfosPool.Instance.Get(obstaclesToSpawn);
 
             foreach (var ufo in ufos)
             {
-                SpawnUfo(ufo);
+                SpawnObstacle(ufo);
             }
         }
 
-        private void SpawnUfo(Ufo ufo)
+        private void SpawnObstacle(Ufo ufo)
         {
-            Vector3 spawnDirection = Random.insideUnitCircle.normalized * spawnDistance;
-            Vector3 spawnPoint = transform.position + spawnDirection;
-
-            float speed = ufoSpeedMinMax.GetRandom();
-            float rotation = ufoRotationSpeedMinMax.GetRandom();
+            var halfUfoSize = transform.localScale.x / 2f;
+            var spawnPoint = GetRandomSpawnPoint(halfUfoSize);
             ufo.SetPosition(spawnPoint);
+
+            var speed = ufoSpeedMinMax.GetRandom();
+            var rotation = ufoRotationSpeedMinMax.GetRandom();
             ufo.SetSpeedAndRotation(speed, rotation);
             ufo.Launch();
         }

@@ -1,29 +1,32 @@
-using Player;
+using Managers;
 using UnityEngine;
 
-public class GameOverUI : MonoBehaviour
+namespace UI
 {
-    private void Start()
+    public class GameOverUI : MonoBehaviour
     {
-        RespawnManager.Instance.OnDeath += OnDeath;
-        RespawnManager.Instance.OnRespawn += OnRespawn;
+        private void Start()
+        {
+            RespawnManager.Instance.OnDeath += OnDeath;
+            RespawnManager.Instance.OnRespawn += OnRespawn;
             
-        gameObject.SetActive(false);
-    }
+            gameObject.SetActive(false);
+        }
 
-    private void OnDestroy()
-    {
-        RespawnManager.Instance.OnDeath -= OnDeath;
-        RespawnManager.Instance.OnRespawn -= OnRespawn;
-    }
+        private void OnDestroy()
+        {
+            RespawnManager.Instance.OnDeath -= OnDeath;
+            RespawnManager.Instance.OnRespawn -= OnRespawn;
+        }
 
-    private void OnDeath()
-    {
-        gameObject.SetActive(true);
-    }
+        private void OnDeath()
+        {
+            gameObject.SetActive(true);
+        }
 
-    private void OnRespawn()
-    {
-        gameObject.SetActive(false);
+        private void OnRespawn()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

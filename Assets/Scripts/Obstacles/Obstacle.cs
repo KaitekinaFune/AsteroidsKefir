@@ -9,7 +9,7 @@ namespace Obstacles
         
         public abstract void TryDamage();
         public abstract void DestroyObstacle();
-        public abstract void OnPlayerRespawn();
+        public abstract void DestroyObstacleSilent();
         
         protected virtual void Awake()
         {

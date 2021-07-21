@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Graphics
+namespace Managers
 {
     public class GraphicsManager : MonoBehaviour
     {

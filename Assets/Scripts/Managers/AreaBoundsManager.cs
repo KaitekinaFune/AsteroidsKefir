@@ -1,4 +1,5 @@
 using UnityEngine;
+using Utils;
 
 namespace Managers
 {
@@ -11,10 +12,12 @@ namespace Managers
     
         private void Awake()
         {
-            var halfObjectWidth = transform.localScale.x / 2f;
-            var halfObjectHeight = transform.localScale.y / 2f;
-            screenHalfWidthInWorldUnits = Camera.main.aspect * Camera.main.orthographicSize + halfObjectWidth;
-            screenHalfHeightInWorldUnits = Camera.main.orthographicSize + halfObjectHeight;
+            var localScale = objectToLock.localScale;
+            var halfObjectWidth = localScale.x / 2f;
+            var halfObjectHeight = localScale.y / 2f;
+            
+            screenHalfWidthInWorldUnits = ScreenBounds.GetScreenHalfWidthInWorldUnits() + halfObjectWidth;
+            screenHalfHeightInWorldUnits = ScreenBounds.GetScreenHalfHeightInWorldUnits() + halfObjectHeight;
         }
 
         private void Update()

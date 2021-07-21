@@ -1,19 +1,17 @@
 using System;
 using Managers;
 using UnityEngine;
+using Utils;
 using Random = UnityEngine.Random;
 
 namespace Obstacles
 {
-    public class Asteroid : Obstacle
+    public class Asteroid : Obstacle, IDestroyableByBoundary
     {
-        [SerializeField] private float maxLifeTime = 3f;
-
-        private bool isShattered;
         public float initialSpeed { get; private set; }
         
-        private float lifeTime;
-
+        private bool isShattered;
+        
         public event Action<Asteroid> OnAsteroidShattered;
 
         public void SetSize(Vector3 scale)
@@ -37,19 +35,8 @@ namespace Obstacles
         private void Launch(Vector3 direction, float speed)
         {
             initialSpeed = speed;
-            lifeTime = 0f;
             gameObject.SetActive(true);
             rb.AddForce(direction * initialSpeed);
-        }
-
-        private void Update()
-        {
-            lifeTime += Time.deltaTime;
-
-            if (lifeTime >= maxLifeTime)
-            {
-                DestroyObstacle();
-            }
         }
 
         public override void DestroyObstacle()
@@ -71,9 +58,14 @@ namespace Obstacles
             OnAsteroidShattered = null;
         }
 
-        public override void OnPlayerRespawn()
+        public override void DestroyObstacleSilent()
         {
             AsteroidsPool.Instance.ReturnObstacleToPool(this);
+        }
+
+        public void OnBoundaryTouch()
+        {
+            DestroyObstacleSilent();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Weapons
     
         protected virtual void Awake()
         {
-            shootPoint = GetComponent<ShootPointHolder>().transform;
+            shootPoint = GetComponent<ShootPointHolder>().ShootPoint;
         }
 
         public void TryShootProjectile()
@@ -30,7 +30,7 @@ namespace Weapons
     
         protected virtual void Shoot()
         {
-            Instantiate(projectilePrefab, shootPoint.position, shootPoint.localRotation);
+            Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
         }
 
         protected abstract bool CanShoot();

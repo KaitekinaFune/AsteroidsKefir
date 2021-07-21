@@ -1,13 +1,12 @@
 using UnityEngine;
+using Utils;
 
 namespace Weapons
 {
-    public abstract class Projectile : MonoBehaviour
+    public abstract class Projectile : MonoBehaviour, IDestroyableByBoundary
     {
         [SerializeField] private float speed;
-        [SerializeField] private float maxLifeTime = 1f;
 
-        private float lifeTime;
         private Rigidbody rb;
 
         private void Start()
@@ -21,15 +20,11 @@ namespace Weapons
             rb.AddForce(transform.up * speed);
         }
 
-        private void Update()
+        public void OnBoundaryTouch()
         {
-            lifeTime += Time.deltaTime;
-            if (lifeTime > maxLifeTime)
-            {
-                Destroy(gameObject);
-            }
+            Destroy(gameObject);
         }
-        
+
         protected abstract void OnTriggerEnter(Collider other);
     }
 }

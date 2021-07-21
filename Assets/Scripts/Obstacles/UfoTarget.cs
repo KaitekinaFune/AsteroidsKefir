@@ -1,18 +1,21 @@
 using UnityEngine;
 
-public class UfoTarget : MonoBehaviour
+namespace Obstacles
 {
-    public static UfoTarget Instance;
-
-    private void Awake()
+    public class UfoTarget : MonoBehaviour
     {
-        if (Instance == null)
+        public static UfoTarget Instance;
+
+        private void Awake()
         {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }
