@@ -18,7 +18,7 @@ namespace Weapons
 
         protected override bool CanShoot()
         {
-            return lasersLeft > 0 && nextFireTime >= Time.time;
+            return lasersLeft > 0 && Time.time >= nextFireTime;
         }
 
         protected override void Shoot()
@@ -29,7 +29,7 @@ namespace Weapons
     
         private void Update()
         {
-            if (lasersLeft <= maxLasers)
+            if (lasersLeft < maxLasers)
             {
                 TryRestockLasers();
             }

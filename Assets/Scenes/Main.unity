@@ -279,10 +279,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9381c4f3c651d5b469f0ad23afb4baa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 7439752984475532981, guid: b242f5f94efa0d847aa672e24ff9588b, type: 3}
-  fireRate: 5
+  projectilePrefab: {fileID: 7439752984475532981, guid: 0ea73950f14ca4941bdc662557185b28, type: 3}
+  fireRate: 1
   maxLasers: 3
-  lasersRestockRate: 5
+  lasersRestockRate: 0.25
 --- !u!114 &151934971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1410,7 +1410,7 @@ MonoBehaviour:
     max: 1.5
   asteroidsShattersAmountMinMax:
     min: 2
-    max: 4
+    max: 3
   shatterAsteroidSizeRatioMinMax:
     min: 1.25
     max: 1.5
