@@ -1,3 +1,4 @@
+using System;
 using Managers;
 using Ship.Input;
 using UnityEngine;
@@ -27,7 +28,10 @@ namespace Ship
                 : new PlayerShipWeaponsInput();
             shipWeapons = GetComponent<ShipWeapons>();
             shipWeapons.SetInput(shipWeaponsInput);
+        }
 
+        private void Start()
+        {
             GameOverManager.Instance.OnRespawn += OnRespawn;
         }
 
