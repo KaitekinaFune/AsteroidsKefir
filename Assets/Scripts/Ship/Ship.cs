@@ -1,4 +1,3 @@
-using System;
 using Managers;
 using Ship.Input;
 using UnityEngine;
