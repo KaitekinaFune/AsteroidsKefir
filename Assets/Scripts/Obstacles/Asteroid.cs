@@ -9,7 +9,6 @@ namespace Obstacles
     public class Asteroid : Obstacle, IDestroyableByBoundary
     {
         public float initialSpeed { get; private set; }
-        
         private bool isShattered;
         
         public event Action<Asteroid> OnAsteroidShattered;
@@ -23,6 +22,7 @@ namespace Obstacles
         public void FirstLaunch(Vector3 direction, float speed)
         {
             isShattered = false;
+            initialSpeed = speed;
             Launch(direction, speed);
         }
 
@@ -34,9 +34,9 @@ namespace Obstacles
 
         private void Launch(Vector3 direction, float speed)
         {
-            initialSpeed = speed;
+            rb.velocity = Vector3.zero;
             gameObject.SetActive(true);
-            rb.AddForce(direction * initialSpeed);
+            rb.AddForce(direction * speed);
         }
 
         public override void DestroyObstacle()

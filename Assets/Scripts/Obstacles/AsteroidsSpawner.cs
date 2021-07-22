@@ -60,9 +60,10 @@ namespace Obstacles
             
             var spawnPoint = oldTransform.position;
             newAsteroid.SetPosition(spawnPoint);
-            
+
             var direction = GetRandomDirection(spawnPoint);
-            newAsteroid.LaunchShattered(-direction, oldAsteroid.initialSpeed * ratio);
+            var newAsteroidSpeed = ratio * oldAsteroid.initialSpeed;
+            newAsteroid.LaunchShattered(-direction, newAsteroidSpeed);
         }
     }
 }
