@@ -1,51 +1,17 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Obstacles
 {
-    public abstract class ObstaclesPooler<T> : MonoBehaviour where T: Obstacle
+    public abstract class ObstaclesPooler : ObjectPooler<Obstacle>
     {
-        public static ObstaclesPooler<T> Instance;
-
-        [SerializeField] private T obstaclePrefab;
-
-        private readonly Stack<T> asteroids = new Stack<T>();
-
-        private void Awake()
+        public override void ReturnObjectToPool(Obstacle obj)
         {
-            if (Instance == null)
-            {
-                Instance = this;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
+            base.ReturnObjectToPool(obj);
+            obj.gameObject.SetActive(false);
         }
 
-        public IEnumerable<T> Get(int amount)
+        protected ObstaclesPooler(GameObject objectPrefab) : base(objectPrefab)
         {
-            for (int i = 0; i < amount; i++)
-            {
-                if (asteroids.Count == 0)
-                {
-                    AddAsteroids();
-                }
-
-                yield return asteroids.Pop();
-            }
-        }
-
-        private void AddAsteroids()
-        {
-            var obstacle = Instantiate(obstaclePrefab);
-            ReturnObstacleToPool(obstacle);
-        }
-
-        public void ReturnObstacleToPool(T obstacle)
-        {
-            obstacle.gameObject.SetActive(false);
-            asteroids.Push(obstacle);
         }
     }
 }

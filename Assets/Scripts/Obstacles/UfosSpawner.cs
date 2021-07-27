@@ -1,34 +1,39 @@
-using UnityEngine;
-using Utils;
-
 namespace Obstacles
 {
     public class UfosSpawner : ObstacleSpawner
     {
-        [Header("Ufos Settings")] 
-        [SerializeField] private MinMaxFloat ufoSpeedMinMax;
-        [SerializeField] private MinMaxFloat ufoRotationSpeedMinMax;
+        private UfosSpawnerSettings ufoSpawnerSettings;
+        
+        public void Initialize(UfosSpawnerSettings settingsAsset)
+        {
+            ufoSpawnerSettings = settingsAsset;
+        }
 
         protected override void SpawnObstacles()
         {
-            var ufos = UfosPool.Instance.Get(obstaclesToSpawn);
+            var obstacles = UfosPool.Instance.Get(settings.ObstaclesToSpawn);
 
-            foreach (var ufo in ufos)
+            foreach (var obstacle in obstacles)
             {
+                var ufo = (Ufo) obstacle;
                 SpawnObstacle(ufo);
             }
         }
 
         private void SpawnObstacle(Ufo ufo)
         {
-            var halfUfoSize = transform.localScale.x / 2f;
+            var halfUfoSize = ufo.gameObject.transform.localScale.x / 2f;
             var spawnPoint = GetRandomSpawnPoint(halfUfoSize);
             ufo.SetPosition(spawnPoint);
 
-            var speed = ufoSpeedMinMax.GetRandom();
-            var rotation = ufoRotationSpeedMinMax.GetRandom();
-            ufo.SetSpeedAndRotation(speed, rotation);
+            var speed = ufoSpawnerSettings.Speed;
+            var rotation = ufoSpawnerSettings.RotationSpeed;
+            //ufo.SetSpeedAndRotation(speed, rotation);
             ufo.Launch();
+        }
+
+        public UfosSpawner(ObstaclesSpawnerSettings spawnerSettings) : base(spawnerSettings)
+        {
         }
     }
 }

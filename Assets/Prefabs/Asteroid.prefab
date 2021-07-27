@@ -9,9 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 602778753085011420}
-  - component: {fileID: 602778753085011423}
   - component: {fileID: 602778753085011410}
-  - component: {fileID: 602778753085011421}
+  - component: {fileID: -4599493358596921495}
   m_Layer: 6
   m_Name: Asteroid
   m_TagString: Untagged
@@ -34,19 +33,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &602778753085011423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 602778753085011417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e1ab3f213fe1614e9610bff6630678c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxLifeTime: 20
 --- !u!54 &602778753085011410
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -60,10 +46,10 @@ Rigidbody:
   m_AngularDrag: 0
   m_UseGravity: 0
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 56
   m_CollisionDetection: 0
---- !u!65 &602778753085011421
+--- !u!65 &-4599493358596921495
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,7 +60,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 0.83, z: 0.2}
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &602778753245461683
 GameObject:
@@ -198,7 +184,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6985685649412132614}
-  - component: {fileID: 9031293948093529188}
   m_Layer: 6
   m_Name: Graphics
   m_TagString: Untagged
@@ -222,20 +207,6 @@ Transform:
   m_Father: {fileID: 602778753085011420}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9031293948093529188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7786629987735135814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbab3930d3a0b554b9ad0e7aaa2c0fdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Graphics2D: {fileID: 602778753663583513}
-  Graphics3D: {fileID: 602778753245461683}
 --- !u!1001 &6940025527030244390
 PrefabInstance:
   m_ObjectHideFlags: 0

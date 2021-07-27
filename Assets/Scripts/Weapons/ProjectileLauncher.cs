@@ -2,35 +2,23 @@ using UnityEngine;
 
 namespace Weapons
 {
-    [RequireComponent(typeof(ShootPointHolder))]
-    public abstract class ProjectileLauncher : MonoBehaviour
+    public abstract class ProjectileLauncher
     {
-        [SerializeField] protected GameObject projectilePrefab;
-        [SerializeField] protected float fireRate;
-
-        private Transform shootPoint;
-    
+        protected ProjectileLauncherSettings settings;
+        protected Transform shootPoint;
+        
         protected float nextFireTime;
-    
-        protected virtual void Awake()
+
+        public void SetGameObject(GameObject playerShip)
         {
-            shootPoint = GetComponent<ShootPointHolder>().ShootPoint;
+            shootPoint = playerShip.transform;
         }
 
-        public void TryShootProjectile()
+        public void SetSettings(ProjectileLauncherSettings settings)
         {
-            if (CanShoot())
-            {
-                nextFireTime = Time.time + 1f / fireRate;
-                Shoot();
-            }
-        }
-    
-        protected virtual void Shoot()
-        {
-            Instantiate(projectilePrefab, shootPoint.position, shootPoint.rotation);
+            this.settings = settings;
         }
 
-        protected abstract bool CanShoot();
+        public abstract void TryShootProjectile();
     }
 }

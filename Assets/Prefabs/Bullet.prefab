@@ -90,7 +90,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2824482772803093987}
-  - component: {fileID: 682583262642267615}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -114,20 +113,6 @@ Transform:
   m_Father: {fileID: 7439752984475532978}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &682583262642267615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2901107412583037143}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbab3930d3a0b554b9ad0e7aaa2c0fdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Graphics2D: {fileID: 7439752985788119684}
-  Graphics3D: {fileID: 223955516120417826}
 --- !u!1 &7439752984475532981
 GameObject:
   m_ObjectHideFlags: 0
@@ -137,9 +122,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7439752984475532978}
-  - component: {fileID: -8957526841943581977}
-  - component: {fileID: 3970410984120507469}
-  - component: {fileID: 8370493163315751258}
   m_Layer: 0
   m_Name: Bullet
   m_TagString: Untagged
@@ -162,49 +144,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &-8957526841943581977
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7439752984475532981}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 56
-  m_CollisionDetection: 0
---- !u!65 &3970410984120507469
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7439752984475532981}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1, z: 0.1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8370493163315751258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7439752984475532981}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a8da7916ed8f6d48bd48b1f0e30ce0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 500
-  maxLifeTime: 2
 --- !u!1 &7439752985788119684
 GameObject:
   m_ObjectHideFlags: 0

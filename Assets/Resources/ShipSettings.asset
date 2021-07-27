@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7a2f39a313943142b632a55081a49a3, type: 3}
+  m_Name: ShipSettings
+  m_EditorClassIdentifier: 
+  shipPrefab: {fileID: 1773628499936074832, guid: 4ddfbbce42bf95245b93e94534650ccf, type: 3}
+  turnSpeed: 250
+  moveSpeed: 10
+  spawnPosition: {x: 0, y: 0, z: 0}
+  spawnRotation: {x: 0, y: 0, z: 0, w: 0}
+  bulletLauncherSettings:
+    projectilePrefab: {fileID: 7439752984475532981, guid: b242f5f94efa0d847aa672e24ff9588b, type: 3}
+    projectileSpeed: 0.15
+    fireRate: 5
+  laserLauncherSettings:
+    projectilePrefab: {fileID: 7439752984475532981, guid: b242f5f94efa0d847aa672e24ff9588b, type: 3}
+    projectileSpeed: 0.2
+    fireRate: 5
+    maxLasers: 3
+    lasersRestockRate: 5

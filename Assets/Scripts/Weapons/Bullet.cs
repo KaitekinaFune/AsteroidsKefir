@@ -5,14 +5,12 @@ namespace Weapons
 {
     public class Bullet : Projectile
     {
-        protected override void OnTriggerEnter(Collider other)
+        protected override void OnHitObject(GameObject colliderGameObject)
         {
-            var obstacle = other.GetComponent<Obstacle>();
-            if (obstacle != null)
-            {
-                obstacle.TryDamage();
-                Destroy(gameObject);
-            }
+            var asteroid = AsteroidsPool.Instance.GetObstacleController(colliderGameObject);
+            asteroid?.TryDamage();
+            base.OnHitObject(colliderGameObject);
+            BulletPooler.Instance.ReturnObjectToPool(this);
         }
     }
 }

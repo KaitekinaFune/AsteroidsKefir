@@ -17,6 +17,7 @@ namespace Ship
 
         private void Awake()
         {
+            /*
             shipEngineInput = shipSettings.Ai 
                 ? (IShipEngineInput) new AiShipEngineInput() 
                 : new PlayerShipEngineInput();
@@ -27,6 +28,8 @@ namespace Ship
                 : new PlayerShipWeaponsInput();
             shipWeapons = GetComponent<ShipWeapons>();
             shipWeapons.SetInput(shipWeaponsInput);
+            
+            */
         }
 
         private void Start()

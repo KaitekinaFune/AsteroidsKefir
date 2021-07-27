@@ -3,17 +3,60 @@ using Utils;
 
 namespace Obstacles
 {
-    public abstract class ObstacleSpawner : MonoBehaviour
+    public abstract class ObstacleSpawner
     {
-        [Header("Spawn Settings")] 
-        [SerializeField] private float spawnRate = 1f;
-        [SerializeField] protected int obstaclesToSpawn = 1;
+        protected readonly ObstaclesSpawnerSettings settings;
+        private float nextObstacleSpawnTime;
 
-        protected abstract void SpawnObstacles();
-        
-        private void Start()
+        private bool IsEnabled;
+
+        protected ObstacleSpawner(ObstaclesSpawnerSettings obstaclesSpawnerSettings)
         {
-            InvokeRepeating(nameof(SpawnObstacles), spawnRate, spawnRate);
+            settings = obstaclesSpawnerSettings;
+            SubscribeToListeners(true);
+            Enable();
+        }
+
+        private void SubscribeToListeners(bool value)
+        {
+            if (value)
+            {
+                GameEventSystem.OnUpdate += TrySpawnObstacles;
+                GameEventSystem.OnGameRestart += Enable;
+                GameEventSystem.OnGameEnd += Disable;
+            }
+            else
+            {
+                GameEventSystem.OnUpdate -= TrySpawnObstacles;
+                GameEventSystem.OnGameRestart -= Enable;
+                GameEventSystem.OnGameEnd -= Disable;
+            }
+        }
+        
+        private void TrySpawnObstacles()
+        {
+            if (!IsEnabled)
+            {
+                return;
+            }
+
+            if (Time.time >= nextObstacleSpawnTime)
+            {
+                nextObstacleSpawnTime = Time.time + 1f / settings.SpawnRate;
+                SpawnObstacles();
+            }
+        }
+        
+        protected abstract void SpawnObstacles();
+
+        private void Enable()
+        {
+            IsEnabled = true;
+        }
+
+        private void Disable()
+        {
+            IsEnabled = false;
         }
 
         protected Vector3 GetRandomSpawnPoint(float halfObjSize)

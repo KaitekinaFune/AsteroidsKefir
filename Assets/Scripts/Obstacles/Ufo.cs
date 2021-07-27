@@ -1,5 +1,4 @@
 using Managers;
-using UnityEngine;
 
 namespace Obstacles
 {
@@ -8,14 +7,6 @@ namespace Obstacles
         private float speed;
         private float rotationSpeed;
         
-        private Transform target;
-
-        protected override void Awake()
-        {
-            base.Awake();
-            target = UfoTarget.Instance.transform;
-        }
-
         public override void TryDamage()
         {
             DestroyObstacle();
@@ -24,12 +15,12 @@ namespace Obstacles
         public override void DestroyObstacle()
         {
             ScoreManager.Instance.OnUfoDestroyed();
-            UfosPool.Instance.ReturnObstacleToPool(this);
+            UfosPool.Instance.ReturnObjectToPool(this);
         }
 
-        public override void DestroyObstacleSilent()
+        public void DestroyObstacleSilent()
         {
-            UfosPool.Instance.ReturnObstacleToPool(this);
+            UfosPool.Instance.ReturnObjectToPool(this);
         }
 
         public void Launch()
@@ -37,14 +28,15 @@ namespace Obstacles
             gameObject.SetActive(true);
         }
 
+        /*
         private void FixedUpdate()
         {
             var direction = target.position - rb.position;
             direction.Normalize();
 
-            var rotateAmount = Vector3.Cross(direction, transform.up);
+            var rotateAmount = Vector3.Cross(direction, gameObject.transform.up);
             rb.angularVelocity = -rotateAmount * rotationSpeed;
-            rb.velocity = transform.up * speed;
+            rb.velocity = gameObject.transform.up * speed;
         }
 
         public void SetSpeedAndRotation(float speed, float rotationSpeed)
@@ -52,5 +44,6 @@ namespace Obstacles
             this.speed = speed;
             this.rotationSpeed = rotationSpeed;
         }
+        */
     }
 }

@@ -4,43 +4,54 @@ namespace Weapons
 {
     public class LaserLauncher : ProjectileLauncher
     {
-        [SerializeField] private int maxLasers = 3;
-        [SerializeField] private float lasersRestockRate = 5f;
+        private new LaserLauncherSettings settings;
 
         private int lasersLeft;
         private float nextLaserRestockTime;
 
-        protected override void Awake()
+        public void SetSettings(LaserLauncherSettings settings)
         {
-            base.Awake();
-            lasersLeft = maxLasers;
+            this.settings = settings;
         }
 
-        protected override bool CanShoot()
+        public void ResetLasers()
+        {
+            lasersLeft = settings.MaxLasers;
+        }
+
+        private bool CanShoot()
         {
             return lasersLeft > 0 && Time.time >= nextFireTime;
         }
 
-        protected override void Shoot()
+        private void Shoot()
         {
-            base.Shoot();
             lasersLeft--;
         }
-    
-        private void Update()
+
+        public override void TryShootProjectile()
         {
-            if (lasersLeft < maxLasers)
+            if (CanShoot())
+            {
+                nextFireTime = Time.time + 1f / settings.FireRate;
+                Shoot();
+            }
+        }
+
+        public void OnUpdate()
+        {
+            if (lasersLeft < settings.MaxLasers)
             {
                 TryRestockLasers();
             }
         }
-    
+
         private void TryRestockLasers()
         {
             if (Time.time > nextLaserRestockTime)
             {
                 lasersLeft++;
-                nextLaserRestockTime = Time.time + 1f / lasersRestockRate;
+                nextLaserRestockTime = Time.time + 1f / settings.LasersRestockRate;
             }
         }
     }

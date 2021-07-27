@@ -1,30 +1,49 @@
+using Obstacles;
 using UnityEngine;
-using Utils;
 
 namespace Weapons
 {
-    public abstract class Projectile : MonoBehaviour, IDestroyableByBoundary
+    public abstract class Projectile
     {
-        [SerializeField] private float speed;
+        private GameObject gameObject;
+        private float speed;
 
-        private Rigidbody rb;
-
-        private void Start()
+        public void SetGameObject(GameObject obj)
         {
-            rb = GetComponent<Rigidbody>();
-            Launch();
+            gameObject = obj;
         }
 
-        private void Launch()
+        public void Launch(Transform shootPoint, float newSpeed)
         {
-            rb.AddForce(transform.up * speed);
+            gameObject.transform.position = shootPoint.position;
+            gameObject.transform.rotation = shootPoint.rotation;
+            speed = newSpeed;
+            GameEventSystem.OnUpdate += OnUpdate;
+        }
+        
+        private void OnUpdate()
+        {
+            var moveDistance = speed * Time.deltaTime;
+            CheckCollisions(moveDistance);
+            gameObject.transform.Translate(Vector3.up * speed);
+        }
+        
+        private void CheckCollisions(float moveDistance)
+        {
+            var ray = new Ray (gameObject.transform.position, gameObject.transform.up);
+            
+            if (Physics.Raycast(ray, out var hit, moveDistance))
+            {
+                OnHitObject(hit.collider.gameObject);
+            }
         }
 
-        public void OnBoundaryTouch()
+        protected virtual void OnHitObject(GameObject colliderGameObject)
         {
-            Destroy(gameObject);
+            var ufo = UfosPool.Instance.GetObstacleController(colliderGameObject);
+            ufo?.DestroyObstacle();
+            
+            GameEventSystem.OnUpdate -= OnUpdate;
         }
-
-        protected abstract void OnTriggerEnter(Collider other);
     }
 }

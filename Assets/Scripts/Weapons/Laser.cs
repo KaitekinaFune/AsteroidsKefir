@@ -5,14 +5,12 @@ namespace Weapons
 {
     public class Laser : Projectile
     {
-        protected override void OnTriggerEnter(Collider other)
+        protected override void OnHitObject(GameObject colliderGameObject)
         {
-            var obstacle = other.GetComponent<Obstacle>();
-            if (obstacle != null)
-            {
-                obstacle.DestroyObstacle();
-                Destroy(gameObject);
-            }
+            base.OnHitObject(colliderGameObject);
+            var asteroid = AsteroidsPool.Instance.GetObstacleController(colliderGameObject);
+            asteroid?.DestroyObstacle();
+            LaserPooler.Instance.ReturnObjectToPool(this);
         }
     }
 }

@@ -35,6 +35,7 @@ namespace Managers
         {
             OnRespawn?.Invoke();
 
+            /*
             var projectiles = FindObjectsOfType<Projectile>();
             var obstacles = FindObjectsOfType<Obstacle>();
 
@@ -47,6 +48,7 @@ namespace Managers
             {
                 obstacle.DestroyObstacleSilent();
             }
+            */
         }
 
         private void Die()

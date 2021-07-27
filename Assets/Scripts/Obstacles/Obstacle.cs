@@ -1,33 +1,59 @@
-using Ship;
 using UnityEngine;
 
 namespace Obstacles
 {
-    public abstract class Obstacle : MonoBehaviour
+    public abstract class Obstacle
     {
+        public GameObject gameObject { get; private set; }
         protected Rigidbody rb;
-        
-        public abstract void TryDamage();
-        public abstract void DestroyObstacle();
-        public abstract void DestroyObstacleSilent();
-        
-        protected virtual void Awake()
+
+        protected void Enable()
         {
-            rb = GetComponent<Rigidbody>();
+            GameEventSystem.OnUpdate += OnUpdate;
+        }
+        
+        protected void Disable()
+        {
+            GameEventSystem.OnUpdate -= OnUpdate;
         }
 
+        private void OnUpdate()
+        {
+            CheckForCollisions();
+            CheckForInbounds();
+        }
+
+        private void CheckForInbounds()
+        {
+            //TODO: 
+        }
+
+        public abstract void TryDamage();
+        public abstract void DestroyObstacle();
+        
         public void SetPosition(Vector3 spawnPoint)
         {
-            transform.position = spawnPoint;
+            gameObject.transform.position = spawnPoint;
+        }
+
+        private void CheckForCollisions()
+        {
+            var position = gameObject.transform.position;
+            var scale = gameObject.transform.localScale;
+            
+            var playerPosition = PlayerController.playerShip.transform.position;
+            var playerScale = PlayerController.playerShip.transform.localScale;
+            
+            if (SimpleCollider.Overlaps(position, scale, playerPosition, playerScale))
+            {
+                GameEventSystem.EndGame();
+            }
         }
         
-        private void OnTriggerEnter(Collider other)
+        public void SetGameObject(GameObject obj)
         {
-            var ship = other.GetComponent<ShipHealth>();
-            if (ship != null)
-            {
-                ship.TakeDamage();
-            }
+            gameObject = obj;
+            rb = gameObject.GetComponent<Rigidbody>();
         }
     }
 }
