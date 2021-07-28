@@ -11,6 +11,11 @@ namespace Weapons
             var asteroid = ObjectPooler<Asteroid>.Instance.GetObstacleController(colliderGameObject);
             asteroid?.TryDamage();
             base.OnHitObject(colliderGameObject);
+            ReturnObjectToPool();
+        }
+
+        protected override void ReturnObjectToPool()
+        {
             ObjectPooler<Bullet>.Instance.ReturnObjectToPool(this);
         }
     }

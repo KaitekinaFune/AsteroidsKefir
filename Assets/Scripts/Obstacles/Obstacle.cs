@@ -1,42 +1,29 @@
 using Player;
-using ScriptableObjects;
 using UnityEngine;
 using Utils;
 
 namespace Obstacles
 {
-    public abstract class Obstacle : IPoolable
+    public abstract class Obstacle : Poolable
     {
         protected Rigidbody rb;
         
-        public void Launch()
-        {
-            Enable();
-        }
-        
         protected void Enable()
         {
-            GameEventSystem.OnUpdate += OnUpdate;
-        }
-        
-        protected void Disable()
-        {
-            GameEventSystem.OnUpdate -= OnUpdate;
+            gameObject.SetActive(true);
         }
 
-        private void OnUpdate()
+        protected override void OnUpdate()
         {
+            base.OnUpdate();
+
+            if (!gameObject.activeSelf)
+            {
+                return;
+            }
+            
             CheckForCollisions();
-            CheckForInbounds();
         }
-
-        private void CheckForInbounds()
-        {
-            //TODO: 
-        }
-
-        public abstract void TryDamage();
-        public abstract void DestroyObstacle();
         
         public void SetPosition(Vector3 spawnPoint)
         {

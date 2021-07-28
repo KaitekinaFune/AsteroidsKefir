@@ -2,14 +2,15 @@
 
 namespace ScriptableObjects
 {
-    [CreateAssetMenu(fileName = "ObstaclesSpawnerSettings", menuName = "Obstacles Spawner Settings")]
-    public class ObstaclesSpawnerSettings: ScriptableObject
+    [System.Serializable]
+    public class ObstaclesSpawnerSettings
     {
-        [Header("Spawn Settings")]
         [SerializeField] private float spawnRate = 1f;
         [SerializeField] private int obstaclesToSpawn = 1;
+        [SerializeField] private GameObject obstaclePrefab;
 
         public float SpawnRate => spawnRate;
         public int ObstaclesToSpawn => obstaclesToSpawn;
+        public GameObject ObstaclePrefab => obstaclePrefab;
     }
 }

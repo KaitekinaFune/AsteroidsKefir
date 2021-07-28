@@ -34,31 +34,29 @@ namespace Obstacles
 
         private void Launch(Vector3 direction, float speed)
         {
-            rb.velocity = Vector3.zero;
-            gameObject.SetActive(true);
-            rb.AddForce(direction * speed);
             Enable();
+            rb.velocity = Vector3.zero;
+            rb.AddForce(direction * speed);
         }
 
-        public override void DestroyObstacle()
+        public void DestroyObstacle()
         {
-            Disable();
             OnAsteroidDestroyed?.Invoke();
-            ObjectPooler<Asteroid>.Instance.ReturnObjectToPool(this);
+            ReturnObjectToPool();
         }
 
-        public override void TryDamage()
+        public void TryDamage()
         {
             if (isShattered)
             {
                 DestroyObstacle();
                 return;
             }
-
+            
             OnAsteroidShattered?.Invoke(this);
         }
 
-        public void DestroyObstacleSilent()
+        protected override void ReturnObjectToPool()
         {
             ObjectPooler<Asteroid>.Instance.ReturnObjectToPool(this);
         }

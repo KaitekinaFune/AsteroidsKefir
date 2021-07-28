@@ -1,20 +1,9 @@
 ﻿using System.Collections.Generic;
-using ScriptableObjects;
 using UnityEngine;
 
 namespace Utils
-{
-    public abstract class IPoolable
-    {
-        public GameObject gameObject { get; private set; }
-
-        public virtual void SetGameObject(GameObject obj)
-        {
-            gameObject = obj;
-        }
-    }
-    
-    public class ObjectPooler<T> where T: IPoolable, new()
+{   
+    public class ObjectPooler<T> where T: Poolable, new()
     {
         public static ObjectPooler<T> Instance;
 
@@ -22,7 +11,7 @@ namespace Utils
         private readonly Dictionary<GameObject, T> objectsDict = new Dictionary<GameObject, T>();
 
         private readonly GameObject objectPrefab;
-
+        
         public ObjectPooler(GameObject objectPrefab)
         {
             this.objectPrefab = objectPrefab;

@@ -10,7 +10,6 @@ using Weapons;
 public class GameBoot : MonoBehaviour
 {
     [SerializeField] private ShipSettings playerShipSettings;
-    [SerializeField] private ObstaclesSpawnerSettings obstacleSpawnerSettings;
     [SerializeField] private AsteroidsSpawnerSettings asteroidsSpawnerSettings;
     [SerializeField] private UfosSpawnerSettings ufosSpawnerSettings;
     
@@ -24,22 +23,20 @@ public class GameBoot : MonoBehaviour
         var laserPooler = new ObjectPooler<Laser>(playerShipSettings.LaserLauncherSettings.ProjectilePrefab);
         laserPooler.Initialize();
         
-        var asteroidsPooler = new ObjectPooler<Asteroid>(asteroidsSpawnerSettings.AsteroidPrefab);
+        var asteroidsPooler = new ObjectPooler<Asteroid>(asteroidsSpawnerSettings.SpawnerSettings.ObstaclePrefab);
         asteroidsPooler.Initialize();
-        
-        var asteroidsSpawner = new AsteroidsSpawner(obstacleSpawnerSettings);
+        var asteroidsSpawner = new AsteroidsSpawner(asteroidsSpawnerSettings.SpawnerSettings);
         asteroidsSpawner.Initialize(asteroidsSpawnerSettings);
         
-        var ufosPooler = new ObjectPooler<Ufo>(ufosSpawnerSettings.UfoPrefab);
+        var ufosPooler = new ObjectPooler<Ufo>(ufosSpawnerSettings.SpawnerSettings.ObstaclePrefab);
         ufosPooler.Initialize();
-        
-        var ufoSpawner = new UfosSpawner(obstacleSpawnerSettings);
+        var ufoSpawner = new UfosSpawner(asteroidsSpawnerSettings.SpawnerSettings);
         ufoSpawner.Initialize(ufosSpawnerSettings);
-        
         
         ScoreManager.Initialize();
         GraphicsManager.Initialize();
         GameEventSystem.StartGame();
+        
         Destroy(gameObject);
     }
 }

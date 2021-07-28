@@ -12,10 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fab32301ec646fb8a38cf07dc9cd354, type: 3}
   m_Name: UfosSpawnerSettings
   m_EditorClassIdentifier: 
-  ufoPrefab: {fileID: 1447208069635716668, guid: 69e2edf5865435b4685c7321b64389a2, type: 3}
+  spawnerSettings:
+    spawnRate: 0.2
+    obstaclesToSpawn: 1
+    obstaclePrefab: {fileID: 1447208069635716668, guid: 69e2edf5865435b4685c7321b64389a2, type: 3}
   SpeedMinMax:
-    min: 10
-    max: 20
+    min: 150
+    max: 250
   RotationSpeedMinMax:
-    min: 10
-    max: 20
+    min: 100
+    max: 200

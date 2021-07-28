@@ -1,37 +1,46 @@
 using Obstacles;
-using ScriptableObjects;
 using UnityEngine;
 using Utils;
 
 namespace Weapons
 {
-    public abstract class Projectile : IPoolable
+    public abstract class Projectile : Poolable
     {
         private float speed;
-
+        
         public void Launch(Transform shootPoint, float newSpeed)
         {
             gameObject.SetActive(true);
             gameObject.transform.position = shootPoint.position;
             gameObject.transform.rotation = shootPoint.rotation;
             speed = newSpeed;
-            GameEventSystem.OnUpdate += OnUpdate;
         }
         
-        private void OnUpdate()
+        protected override void OnUpdate()
         {
+            base.OnUpdate();
+
+            if (!gameObject.activeSelf)
+            {
+                return;
+            }
+            
             var moveDistance = speed * Time.deltaTime;
             CheckCollisions(moveDistance);
             gameObject.transform.Translate(Vector3.up * moveDistance);
         }
-        
+
         private void CheckCollisions(float moveDistance)
         {
-            var ray = new Ray (gameObject.transform.position, gameObject.transform.up);
-            Debug.DrawRay(ray.origin, ray.direction);
+            var ray = new Ray(gameObject.transform.position, gameObject.transform.up);
                 
             if (Physics.Raycast(ray, out var hit, moveDistance, 1<<8, QueryTriggerInteraction.Collide))
             {
+                if (!hit.collider.gameObject.activeSelf)
+                {
+                    return;
+                }
+                
                 OnHitObject(hit.collider.gameObject);
             }
         }
@@ -40,7 +49,6 @@ namespace Weapons
         {
             var ufo = ObjectPooler<Ufo>.Instance.GetObstacleController(colliderGameObject);
             ufo?.DestroyObstacle();
-            GameEventSystem.OnUpdate -= OnUpdate;
         }
     }
 }

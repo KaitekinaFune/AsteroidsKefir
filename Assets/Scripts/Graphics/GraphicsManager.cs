@@ -1,5 +1,4 @@
 using System;
-using ScriptableObjects;
 
 namespace Graphics
 {

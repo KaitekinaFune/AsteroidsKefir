@@ -46,13 +46,13 @@ namespace Obstacles
             foreach (var obstacle in obstacles)
             {
                 var asteroid = (Asteroid) obstacle;
-                SpawnAsteroidOnShatter(oldAsteroid, asteroid);
+                SpawnShatteredAsteroid(oldAsteroid, asteroid);
             }
             
             ObjectPooler<Asteroid>.Instance.ReturnObjectToPool(oldAsteroid);
         }
 
-        private void SpawnAsteroidOnShatter(Asteroid oldAsteroid, Asteroid newAsteroid)
+        private void SpawnShatteredAsteroid(Asteroid oldAsteroid, Asteroid newAsteroid)
         {
             var oldTransform = oldAsteroid.gameObject.transform;
 

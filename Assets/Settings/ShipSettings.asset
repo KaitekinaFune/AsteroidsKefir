@@ -19,11 +19,11 @@ MonoBehaviour:
   spawnRotation: {x: 0, y: 0, z: 0, w: 0}
   bulletLauncherSettings:
     projectilePrefab: {fileID: 7439752984475532981, guid: b242f5f94efa0d847aa672e24ff9588b, type: 3}
-    projectileSpeed: 25
-    fireRate: 5
+    projectileSpeed: 8
+    fireRate: 3
   laserLauncherSettings:
     projectilePrefab: {fileID: 7439752984475532981, guid: 0ea73950f14ca4941bdc662557185b28, type: 3}
     projectileSpeed: 10
     fireRate: 5
-    maxLasers: 3
-    lasersRestockRate: 5
+    maxLasers: 2
+    lasersRestockRate: 1

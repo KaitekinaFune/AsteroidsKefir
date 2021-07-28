@@ -18,14 +18,11 @@ namespace Obstacles
 
             foreach (var obstacle in obstacles)
             {
-                if (obstacle is var ufo)
-                {
-                    SpawnObstacle(ufo);
-                }
+                SpawnObstacle(obstacle);
             }
         }
 
-        private void SpawnObstacle(Obstacle ufo)
+        private void SpawnObstacle(Ufo ufo)
         {
             var halfUfoSize = ufo.gameObject.transform.localScale.x / 2f;
             var spawnPoint = GetRandomSpawnPoint(halfUfoSize);
@@ -33,7 +30,7 @@ namespace Obstacles
 
             var speed = ufoSpawnerSettings.Speed;
             var rotation = ufoSpawnerSettings.RotationSpeed;
-            //ufo.SetSpeedAndRotation(speed, rotation);
+            ufo.SetSpeedAndRotation(speed, rotation);
             ufo.Launch();
         }
 

@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ea2e02ce8d4d4a9debc4067cf95a44, type: 3}
   m_Name: AsteroidSpawnerSettings
   m_EditorClassIdentifier: 
-  asteroidPrefab: {fileID: 602778753085011417, guid: 042ed4f336be342458107b894f78185a, type: 3}
-  speed: 50
+  spawnerSettings:
+    spawnRate: 0.3
+    obstaclesToSpawn: 1
+    obstaclePrefab: {fileID: 602778753085011417, guid: 042ed4f336be342458107b894f78185a, type: 3}
+  speed: 25
   sizeMinMax:
     min: 1
     max: 2
   asteroidsShattersAmountMinMax:
-    min: 1
+    min: 2
     max: 3
   shatterAsteroidSizeRatioMinMax:
     min: 1.25
