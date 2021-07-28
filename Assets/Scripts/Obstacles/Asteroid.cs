@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Utils;
 using Random = UnityEngine.Random;
 
 namespace Obstacles
@@ -9,7 +10,8 @@ namespace Obstacles
         public float initialSpeed { get; private set; }
         private bool isShattered;
         
-        public event Action<Asteroid> OnAsteroidShattered;
+        public static event Action<Asteroid> OnAsteroidShattered;
+        public static event Action OnAsteroidDestroyed;
         
         public void SetSize(Vector3 scale)
         {
@@ -41,8 +43,8 @@ namespace Obstacles
         public override void DestroyObstacle()
         {
             Disable();
-            //ScoreManager.Instance.OnAsteroidDestroyed();
-            AsteroidsPool.Instance.ReturnObjectToPool(this);
+            OnAsteroidDestroyed?.Invoke();
+            ObjectPooler<Asteroid>.Instance.ReturnObjectToPool(this);
         }
 
         public override void TryDamage()
@@ -53,14 +55,12 @@ namespace Obstacles
                 return;
             }
 
-            //ScoreManager.Instance.OnAsteroidShattered();
             OnAsteroidShattered?.Invoke(this);
-            OnAsteroidShattered = null;
         }
 
         public void DestroyObstacleSilent()
         {
-            AsteroidsPool.Instance.ReturnObjectToPool(this);
+            ObjectPooler<Asteroid>.Instance.ReturnObjectToPool(this);
         }
     }
 }

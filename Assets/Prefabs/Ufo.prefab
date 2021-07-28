@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1447208069574348189}
   - component: {fileID: 1447208069574348190}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: 2DGraphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 1447208069635716642}
   - component: {fileID: 5169174026810163350}
   - component: {fileID: 7282556017780433589}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Ufo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -153,7 +153,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1447208069728426024}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: 3DGraphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 8865072524104785785}
   - component: {fileID: 3232434144761990489}
   - component: {fileID: 4406418264929047130}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3529265211960572152}
-  m_Layer: 7
+  - component: {fileID: 5504404464582351962}
+  m_Layer: 8
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,6 +290,20 @@ Transform:
   m_Father: {fileID: 1447208069635716642}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5504404464582351962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8659405147897573453}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbab3930d3a0b554b9ad0e7aaa2c0fdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Graphics2D: {fileID: 1447208069574348191}
+  Graphics3D: {fileID: 1447208069728426025}
 --- !u!1 &8751751834171930523
 GameObject:
   m_ObjectHideFlags: 0
@@ -300,7 +315,7 @@ GameObject:
   - component: {fileID: 3372555175507243593}
   - component: {fileID: 2274992923743344196}
   - component: {fileID: 9041536636280637878}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -1,4 +1,3 @@
-using Managers;
 using TMPro;
 using UnityEngine;
 
@@ -11,12 +10,16 @@ namespace UI
         private void Start()
         {
             tmp = GetComponent<TextMeshProUGUI>();
-            ScoreManager.Instance.OnScoreChanged += OnScoreChanged;
         }
 
-        private void OnDestroy()
+        private void OnEnable()
         {
-            ScoreManager.Instance.OnScoreChanged -= OnScoreChanged;
+            ScoreManager.OnScoreChanged += OnScoreChanged;
+        }
+
+        private void OnDisable()
+        {
+            ScoreManager.OnScoreChanged -= OnScoreChanged;
         }
 
         private void OnScoreChanged(int newScore)

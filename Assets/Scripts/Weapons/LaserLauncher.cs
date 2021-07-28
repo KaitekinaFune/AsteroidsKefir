@@ -1,41 +1,39 @@
+using ScriptableObjects;
 using UnityEngine;
 
 namespace Weapons
 {
-    public class LaserLauncher : ProjectileLauncher
+    public class LaserLauncher : ProjectileLauncher<Laser>
     {
-        private new LaserLauncherSettings settings;
-
+        private LaserLauncherSettings settings;
+        
         private int lasersLeft;
         private float nextLaserRestockTime;
-
-        public void SetSettings(LaserLauncherSettings settings)
-        {
-            this.settings = settings;
-        }
-
+        
         public void ResetLasers()
         {
             lasersLeft = settings.MaxLasers;
         }
 
-        private bool CanShoot()
+        public override void SetSettings(ProjectileLauncherSettings settings)
         {
-            return lasersLeft > 0 && Time.time >= nextFireTime;
+            base.SetSettings(settings);
+
+            if (settings is LaserLauncherSettings laserSettings)
+            {
+                this.settings = laserSettings;
+            }
         }
 
-        private void Shoot()
+        protected override bool CanShoot()
+        {
+            return base.CanShoot() && lasersLeft > 0;
+        }
+        
+        protected override void Shoot()
         {
             lasersLeft--;
-        }
-
-        public override void TryShootProjectile()
-        {
-            if (CanShoot())
-            {
-                nextFireTime = Time.time + 1f / settings.FireRate;
-                Shoot();
-            }
+            base.Shoot();
         }
 
         public void OnUpdate()

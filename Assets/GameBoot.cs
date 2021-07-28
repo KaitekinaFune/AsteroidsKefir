@@ -1,6 +1,10 @@
+using Graphics;
 using Obstacles;
-using Ship;
+using Player;
+using ScriptableObjects;
+using UI;
 using UnityEngine;
+using Utils;
 using Weapons;
 
 public class GameBoot : MonoBehaviour
@@ -15,25 +19,27 @@ public class GameBoot : MonoBehaviour
         var playerController = new PlayerController(playerShipSettings);
         playerController.Initialize();
 
-        var bulletPooler = new BulletPooler(playerShipSettings.BulletLauncherSettings.ProjectilePrefab);
+        var bulletPooler = new ObjectPooler<Bullet>(playerShipSettings.BulletLauncherSettings.ProjectilePrefab);
         bulletPooler.Initialize();
-        var laserPooler = new LaserPooler(playerShipSettings.LaserLauncherSettings.ProjectilePrefab);
+        var laserPooler = new ObjectPooler<Laser>(playerShipSettings.LaserLauncherSettings.ProjectilePrefab);
         laserPooler.Initialize();
         
-        var asteroidsPooler = new AsteroidsPool(asteroidsSpawnerSettings.AsteroidPrefab);
+        var asteroidsPooler = new ObjectPooler<Asteroid>(asteroidsSpawnerSettings.AsteroidPrefab);
         asteroidsPooler.Initialize();
         
         var asteroidsSpawner = new AsteroidsSpawner(obstacleSpawnerSettings);
         asteroidsSpawner.Initialize(asteroidsSpawnerSettings);
         
-        /*
-        var ufosPooler = new UfosPool(ufoPrefab);
+        var ufosPooler = new ObjectPooler<Ufo>(ufosSpawnerSettings.UfoPrefab);
         ufosPooler.Initialize();
         
         var ufoSpawner = new UfosSpawner(obstacleSpawnerSettings);
         ufoSpawner.Initialize(ufosSpawnerSettings);
-        */
         
+        
+        ScoreManager.Initialize();
+        GraphicsManager.Initialize();
+        GameEventSystem.StartGame();
         Destroy(gameObject);
     }
 }

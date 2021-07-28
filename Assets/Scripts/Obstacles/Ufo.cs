@@ -1,4 +1,5 @@
-using Managers;
+using System;
+using Utils;
 
 namespace Obstacles
 {
@@ -6,6 +7,8 @@ namespace Obstacles
     {
         private float speed;
         private float rotationSpeed;
+
+        public static event Action OnUfoDestroyed;
         
         public override void TryDamage()
         {
@@ -14,20 +17,15 @@ namespace Obstacles
 
         public override void DestroyObstacle()
         {
-            ScoreManager.Instance.OnUfoDestroyed();
-            UfosPool.Instance.ReturnObjectToPool(this);
+            OnUfoDestroyed?.Invoke();
+            ObjectPooler<Ufo>.Instance.ReturnObjectToPool(this);
         }
 
         public void DestroyObstacleSilent()
         {
-            UfosPool.Instance.ReturnObjectToPool(this);
+            ObjectPooler<Ufo>.Instance.ReturnObjectToPool(this);
         }
-
-        public void Launch()
-        {
-            gameObject.SetActive(true);
-        }
-
+        
         /*
         private void FixedUpdate()
         {

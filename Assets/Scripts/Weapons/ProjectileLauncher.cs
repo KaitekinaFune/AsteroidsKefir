@@ -1,24 +1,47 @@
-using UnityEngine;
+﻿using UnityEngine;
+using Utils;
 
 namespace Weapons
 {
-    public abstract class ProjectileLauncher
+    public class ProjectileLauncher<T> where T: Projectile, new()
     {
-        protected ProjectileLauncherSettings settings;
-        protected Transform shootPoint;
+        private ProjectileLauncherSettings settings { get; set; }
+        private Transform shootPoint;
         
-        protected float nextFireTime;
+        private float nextFireTime;
 
         public void SetGameObject(GameObject playerShip)
         {
             shootPoint = playerShip.transform;
         }
 
-        public void SetSettings(ProjectileLauncherSettings settings)
+        public virtual void SetSettings(ProjectileLauncherSettings settings)
         {
             this.settings = settings;
         }
 
-        public abstract void TryShootProjectile();
+        public void TryShootProjectile()
+        {
+            if (CanShoot())
+            {
+                nextFireTime = Time.time + 1f / settings.FireRate;
+                Shoot();
+            }
+        }
+
+        protected virtual bool CanShoot()
+        {
+            return Time.time >= nextFireTime;
+        }
+
+        protected virtual void Shoot()
+        {
+            var projectiles = ObjectPooler<T>.Instance.Get(1);
+            
+            foreach (var projectile in projectiles)
+            {
+                projectile.Launch(shootPoint, settings.ProjectileSpeed);
+            }
+        }
     }
 }

@@ -1,3 +1,6 @@
+using ScriptableObjects;
+using Utils;
+
 namespace Obstacles
 {
     public class UfosSpawner : ObstacleSpawner
@@ -11,16 +14,18 @@ namespace Obstacles
 
         protected override void SpawnObstacles()
         {
-            var obstacles = UfosPool.Instance.Get(settings.ObstaclesToSpawn);
+            var obstacles = ObjectPooler<Ufo>.Instance.Get(settings.ObstaclesToSpawn);
 
             foreach (var obstacle in obstacles)
             {
-                var ufo = (Ufo) obstacle;
-                SpawnObstacle(ufo);
+                if (obstacle is var ufo)
+                {
+                    SpawnObstacle(ufo);
+                }
             }
         }
 
-        private void SpawnObstacle(Ufo ufo)
+        private void SpawnObstacle(Obstacle ufo)
         {
             var halfUfoSize = ufo.gameObject.transform.localScale.x / 2f;
             var spawnPoint = GetRandomSpawnPoint(halfUfoSize);

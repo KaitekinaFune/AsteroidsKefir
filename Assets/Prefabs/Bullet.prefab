@@ -39,7 +39,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 223955516120417826}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &7801519802430679204
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -90,6 +90,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2824482772803093987}
+  - component: {fileID: 8591770433287256698}
   m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
@@ -113,6 +114,20 @@ Transform:
   m_Father: {fileID: 7439752984475532978}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8591770433287256698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2901107412583037143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbab3930d3a0b554b9ad0e7aaa2c0fdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Graphics2D: {fileID: 7439752985788119684}
+  Graphics3D: {fileID: 223955516120417826}
 --- !u!1 &7439752984475532981
 GameObject:
   m_ObjectHideFlags: 0

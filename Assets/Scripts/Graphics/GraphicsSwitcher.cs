@@ -1,4 +1,3 @@
-using Managers;
 using UnityEngine;
 
 namespace Graphics
@@ -10,7 +9,7 @@ namespace Graphics
 
         private void OnEnable()
         {
-            if (GraphicsManager.Instance.is3DOn)
+            if (GraphicsManager.is3DOn)
             {
                 SetTo3D();
             }
@@ -19,14 +18,14 @@ namespace Graphics
                 SetTo2D();
             }
             
-            GraphicsManager.Instance.OnChangeGraphicsTo2D += SetTo2D;
-            GraphicsManager.Instance.OnChangeGraphicsTo3D += SetTo3D;
+            GraphicsManager.OnChangeGraphicsTo2D += SetTo2D;
+            GraphicsManager.OnChangeGraphicsTo3D += SetTo3D;
         }
 
         private void OnDisable()
         {
-            GraphicsManager.Instance.OnChangeGraphicsTo2D -= SetTo2D;
-            GraphicsManager.Instance.OnChangeGraphicsTo3D -= SetTo3D;
+            GraphicsManager.OnChangeGraphicsTo2D -= SetTo2D;
+            GraphicsManager.OnChangeGraphicsTo3D -= SetTo3D;
         }
 
         private void SetTo2D()

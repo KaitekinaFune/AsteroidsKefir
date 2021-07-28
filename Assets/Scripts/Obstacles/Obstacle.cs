@@ -1,12 +1,19 @@
+using Player;
+using ScriptableObjects;
 using UnityEngine;
+using Utils;
 
 namespace Obstacles
 {
-    public abstract class Obstacle
+    public abstract class Obstacle : IPoolable
     {
-        public GameObject gameObject { get; private set; }
         protected Rigidbody rb;
-
+        
+        public void Launch()
+        {
+            Enable();
+        }
+        
         protected void Enable()
         {
             GameEventSystem.OnUpdate += OnUpdate;
@@ -50,9 +57,9 @@ namespace Obstacles
             }
         }
         
-        public void SetGameObject(GameObject obj)
+        public override void SetGameObject(GameObject obj)
         {
-            gameObject = obj;
+            base.SetGameObject(obj);
             rb = gameObject.GetComponent<Rigidbody>();
         }
     }

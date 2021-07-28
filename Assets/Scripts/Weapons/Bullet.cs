@@ -1,5 +1,6 @@
 using Obstacles;
 using UnityEngine;
+using Utils;
 
 namespace Weapons
 {
@@ -7,10 +8,10 @@ namespace Weapons
     {
         protected override void OnHitObject(GameObject colliderGameObject)
         {
-            var asteroid = AsteroidsPool.Instance.GetObstacleController(colliderGameObject);
+            var asteroid = ObjectPooler<Asteroid>.Instance.GetObstacleController(colliderGameObject);
             asteroid?.TryDamage();
             base.OnHitObject(colliderGameObject);
-            BulletPooler.Instance.ReturnObjectToPool(this);
+            ObjectPooler<Bullet>.Instance.ReturnObjectToPool(this);
         }
     }
 }

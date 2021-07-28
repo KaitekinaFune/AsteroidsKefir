@@ -1,5 +1,6 @@
 using Obstacles;
 using UnityEngine;
+using Utils;
 
 namespace Weapons
 {
@@ -8,9 +9,9 @@ namespace Weapons
         protected override void OnHitObject(GameObject colliderGameObject)
         {
             base.OnHitObject(colliderGameObject);
-            var asteroid = AsteroidsPool.Instance.GetObstacleController(colliderGameObject);
+            var asteroid = ObjectPooler<Asteroid>.Instance.GetObstacleController(colliderGameObject);
             asteroid?.DestroyObstacle();
-            LaserPooler.Instance.ReturnObjectToPool(this);
+            ObjectPooler<Laser>.Instance.ReturnObjectToPool(this);
         }
     }
 }

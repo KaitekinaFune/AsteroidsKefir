@@ -1,4 +1,7 @@
+using ScriptableObjects;
 using UnityEngine;
+using Utils;
+
 namespace Obstacles
 {
     public class AsteroidsSpawner : ObstacleSpawner
@@ -8,11 +11,12 @@ namespace Obstacles
         public void Initialize(AsteroidsSpawnerSettings spawnerSettings)
         {
             asteroidsSpawnerSettings = spawnerSettings;
+            Asteroid.OnAsteroidShattered += OnAsteroidShattered;
         }
 
         protected override void SpawnObstacles()
         {
-            var obstacles = AsteroidsPool.Instance.Get(settings.ObstaclesToSpawn);
+            var obstacles = ObjectPooler<Asteroid>.Instance.Get(settings.ObstaclesToSpawn);
 
             foreach (var obstacle in obstacles)
             {
@@ -32,13 +36,12 @@ namespace Obstacles
             var speedRatio = asteroidsSpawnerSettings.Speed / scale.x;
             var direction = GetRandomDirection(spawnPoint);
             asteroid.FirstLaunch(-direction, speedRatio);
-            asteroid.OnAsteroidShattered += OnAsteroidShattered;
         }
 
         private void OnAsteroidShattered(Asteroid oldAsteroid)
         {
             var shattersAmount = asteroidsSpawnerSettings.ShattersAmount;
-            var obstacles = AsteroidsPool.Instance.Get(shattersAmount);
+            var obstacles = ObjectPooler<Asteroid>.Instance.Get(shattersAmount);
 
             foreach (var obstacle in obstacles)
             {
@@ -46,7 +49,7 @@ namespace Obstacles
                 SpawnAsteroidOnShatter(oldAsteroid, asteroid);
             }
             
-            AsteroidsPool.Instance.ReturnObjectToPool(oldAsteroid);
+            ObjectPooler<Asteroid>.Instance.ReturnObjectToPool(oldAsteroid);
         }
 
         private void SpawnAsteroidOnShatter(Asteroid oldAsteroid, Asteroid newAsteroid)
