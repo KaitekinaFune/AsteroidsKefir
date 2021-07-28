@@ -34,13 +34,8 @@ namespace Weapons
         {
             var ray = new Ray(gameObject.transform.position, gameObject.transform.up);
                 
-            if (Physics.Raycast(ray, out var hit, moveDistance, 1<<8, QueryTriggerInteraction.Collide))
+            if (Physics.Raycast(ray, out var hit, moveDistance + .1f, 1<<8, QueryTriggerInteraction.Collide))
             {
-                if (!hit.collider.gameObject.activeSelf)
-                {
-                    return;
-                }
-                
                 OnHitObject(hit.collider.gameObject);
             }
         }

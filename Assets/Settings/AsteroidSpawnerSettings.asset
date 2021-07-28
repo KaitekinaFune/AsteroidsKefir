@@ -18,7 +18,7 @@ MonoBehaviour:
     obstaclePrefab: {fileID: 602778753085011417, guid: 042ed4f336be342458107b894f78185a, type: 3}
   speed: 25
   sizeMinMax:
-    min: 1
+    min: 1.5
     max: 2
   asteroidsShattersAmountMinMax:
     min: 2

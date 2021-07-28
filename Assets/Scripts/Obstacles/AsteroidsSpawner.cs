@@ -41,12 +41,11 @@ namespace Obstacles
         private void OnAsteroidShattered(Asteroid oldAsteroid)
         {
             var shattersAmount = asteroidsSpawnerSettings.ShattersAmount;
-            var obstacles = ObjectPooler<Asteroid>.Instance.Get(shattersAmount);
+            var newAsteroids = ObjectPooler<Asteroid>.Instance.Get(shattersAmount);
 
-            foreach (var obstacle in obstacles)
+            foreach (var newAsteroid in newAsteroids)
             {
-                var asteroid = (Asteroid) obstacle;
-                SpawnShatteredAsteroid(oldAsteroid, asteroid);
+                SpawnShatteredAsteroid(oldAsteroid, newAsteroid);
             }
             
             ObjectPooler<Asteroid>.Instance.ReturnObjectToPool(oldAsteroid);
